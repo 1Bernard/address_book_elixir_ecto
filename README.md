@@ -109,7 +109,7 @@ The code includes `@moduledoc` and `@doc` attributes. You can generate browsable
     ```
 3.  Open the generated documentation in your web browser by opening the file `doc/index.html`.
 
-**Alternatively, you can view the deployed documentation online:** [https://1bernard.github.io/address_book_elixir/readme.html](https://1bernard.github.io/address_book_elixir/readme.html)
+**Alternatively, you can view the deployed documentation online:** [https://1bernard.github.io/address_book_elixir_ecto/readme.html](https://1bernard.github.io/address_book_elixir_ecto/readme.html)
 
 ## Areas for Improvement and Further Learning
 

@@ -1,43 +1,13 @@
 defmodule AddressBookEcto do
-  @moduledoc """
-  `AddressBookEcto` is the main module for a command-line Address Book application that uses Ecto
-  for database interactions. It provides functionalities for user authentication (registration, login, logout)
-  and contact management (add, edit, view, delete, search contacts).
-
-  This module manages the application's main loop, transitioning between pre-login (authentication)
-  and post-login (contact management) states based on the user's login status.
-
-  ## Usage
-
-  To start the application, typically from your application supervisor:
-
-      AddressBookEcto.run()
-
-  The application will then present a menu in the console, guiding the user through
-  authentication or contact management.
-
-  **WARNING**: This implementation stores user passwords in plain text. For a production
-  application, it's crucial to use a secure password hashing library like `Comeonin`.
-  """
-
-  import Ecto.Query # Import Ecto's query DSL
+  import Ecto.Query # Import Ecto's query DSL for database queries
 
   # --- Public Interface ---
 
-  @doc """
-  Starts the address book application loop.
-
-  This function is typically called from the application supervisor's `start` function.
-  It initializes the main loop in a pre-login state (no user logged in).
-
-  The Ecto repository (`AddressBookEcto.Repo`) is expected to be started
-  in the application's supervision tree before calling this function.
-
-  ## Examples
-
-      iex> AddressBookEcto.run()
-      # Starts the application loop, presenting the authentication menu.
-  """
+  # Starts the address book application loop.
+  # This function is typically called from the application supervisor's `start` function.
+  # It initializes the main loop in a pre-login state (no user logged in).
+  # The Ecto repository (`AddressBookEcto.Repo`) is expected to be started
+  # in the application's supervision tree before calling this function.
   @spec run() :: :ok | no_return
   def run do
     # Ecto repo is started in the application.ex supervision tree
@@ -47,20 +17,9 @@ defmodule AddressBookEcto do
 
   # --- Core Logic ---
 
-  @doc """
-  The main application loop that handles both pre-login and post-login states.
-
-  The state is managed by passing the `current_user` struct (or `nil` if not logged in)
-  through recursive calls. It displays the appropriate menu and delegates input handling.
-
-  ## Parameters
-    * `current_user`: An `AddressBookEcto.User` struct if a user is logged in,
-      or `nil` if no user is logged in.
-
-  ## Returns
-    * This function calls itself recursively and does not return a specific value
-      until the session is ended.
-  """
+  # The main application loop that handles both pre-login and post-login states.
+  # The state is managed by passing the `current_user` struct (or `nil` if not logged in)
+  # through recursive calls. It displays the appropriate menu and delegates input handling.
   @spec main_loop(AddressBookEcto.User.t() | nil) :: no_return
   defp main_loop(current_user) do
     # Display the appropriate menu based on login status
@@ -87,18 +46,8 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Handles actions when no user is logged in (registration, login, exit).
-
-  It directs the flow based on the user's menu choice.
-
-  ## Parameters
-    * `input`: A `String` representing the user's menu selection.
-
-  ## Returns
-    * This function calls other functions which eventually lead back to `main_loop(nil)`,
-      so it doesn't return a specific value itself.
-  """
+  # Handles actions when no user is logged in (registration, login, exit).
+  # It directs the flow based on the user's menu choice.
   @spec handle_auth_action(String.t()) :: no_return
   defp handle_auth_action(input) do
     case input do
@@ -112,19 +61,8 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Handles actions when a user is logged in (Add, Edit, View, Delete contacts, Logout, Search).
-
-  It directs the flow based on the user's menu choice and the `current_user`.
-
-  ## Parameters
-    * `input`: A `String` representing the user's menu selection.
-    * `current_user`: The `AddressBookEcto.User` struct of the currently logged-in user.
-
-  ## Returns
-    * This function calls other functions which eventually lead back to `main_loop(current_user)`,
-      so it doesn't return a specific value itself.
-  """
+  # Handles actions when a user is logged in (Add, Edit, View, Delete contacts, Logout, Search).
+  # It directs the flow based on the user's menu choice and the `current_user`.
   @spec handle_contact_action(String.t(), AddressBookEcto.User.t()) :: no_return
   defp handle_contact_action(input, current_user) do
     case input do
@@ -141,14 +79,8 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Displays the authentication menu options.
-
-  This menu is shown when no user is logged in, providing options for registration, login, or exiting the application.
-
-  ## Returns
-    * `:ok` (prints to console)
-  """
+  # Displays the authentication menu options.
+  # This menu is shown when no user is logged in, providing options for registration, login, or exiting the application.
   @spec auth_menu() :: :ok
   defp auth_menu do
     IO.puts(String.pad_leading(" Address Book Application ", 50, "#"))
@@ -157,15 +89,9 @@ defmodule AddressBookEcto do
     IO.puts("0. End Session")
   end
 
-  @doc """
-  Displays the contact management menu options.
-
-  This menu is shown when a user is logged in, providing options for adding, editing,
-  viewing, deleting, searching contacts, or logging out.
-
-  ## Returns
-    * `:ok` (prints to console)
-  """
+  # Displays the contact management menu options.
+  # This menu is shown when a user is logged in, providing options for adding, editing,
+  # viewing, deleting, searching contacts, or logging out.
   @spec contact_menu() :: :ok
   defp contact_menu do
     IO.puts(String.pad_leading(" Contact Management ", 50, "#"))
@@ -179,17 +105,10 @@ defmodule AddressBookEcto do
 
   # --- Authentication Functions ---
 
-  @doc """
-  Registers a new user by getting username and password from the console
-  and inserting them into the database.
-
-  **WARNING**: This implementation stores passwords in plain text. In a
-  production environment, use a library like `Comeonin` for secure password hashing.
-
-  ## Returns
-    * This function interacts with the user via `IO.gets` and `IO.puts`,
-      and then calls `main_loop(nil)` to return to the authentication menu.
-  """
+  # Registers a new user by getting username and password from the console
+  # and inserting them into the database.
+  # WARNING: This implementation stores passwords in plain text. In a
+  # production environment, use a library like `Comeonin` for secure password hashing.
   @spec register() :: no_return
   defp register() do
     IO.puts(String.pad_leading(" New User Registration ", 50, "#"))
@@ -220,18 +139,10 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Logs in an existing user by checking the provided username and password
-  against the database.
-
-  **WARNING**: This function performs a plain text password check. For production,
-  implement secure password verification using hashing (e.g., `Bcrypt` via `Comeonin`).
-
-  ## Returns
-    * This function interacts with the user via `IO.gets` and `IO.puts`.
-      If login is successful, it calls `main_loop(fetched_user)`; otherwise,
-      it calls `main_loop(nil)`.
-  """
+  # Logs in an existing user by checking the provided username and password
+  # against the database.
+  # WARNING: This function performs a plain text password check. For production,
+  # implement secure password verification using hashing (e.g., `Bcrypt` via `Comeonin`).
   @spec login() :: no_return
   defp login() do
     IO.puts(String.pad_leading(" User Login ", 50, "#"))
@@ -249,7 +160,6 @@ defmodule AddressBookEcto do
       %AddressBookEcto.User{password: stored_password} = fetched_user ->
         if stored_password == password do # Check password
           IO.puts(String.pad_leading(" Welcome, #{fetched_user.username}!", 50, "#"))
-
           main_loop(fetched_user) # Start post-login loop with user struct
         else
           IO.puts(String.pad_leading("Invalid username or password.", 50, "#"))
@@ -258,14 +168,8 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Logs out the current user.
-
-  It returns the application to the pre-login state by calling `main_loop(nil)`.
-
-  ## Returns
-    * This function calls `main_loop(nil)` and does not return a specific value itself.
-  """
+  # Logs out the current user.
+  # It returns the application to the pre-login state by calling `main_loop(nil)`.
   @spec logout() :: no_return
   defp logout() do
     IO.puts(String.pad_leading(" Logged out successfully.", 50, "#"))
@@ -274,20 +178,10 @@ defmodule AddressBookEcto do
 
   # --- Contact Management Functions (require current_user) ---
 
-  @doc """
-  Guides the user through adding a new contact.
-
-  It prompts for contact details (first name, last name, contact number, email)
-  and then proceeds to a review/save menu. Users can type `*` at any prompt to
-  cancel and return to the main menu.
-
-  ## Parameters
-    * `current_user`: The `AddressBookEcto.User` struct of the currently logged-in user.
-
-  ## Returns
-    * This function interacts with the user and calls `review_new_contact/2`
-      or `main_loop/1`. It does not return a specific value.
-  """
+  # Guides the user through adding a new contact.
+  # It prompts for contact details (first name, last name, contact number, email)
+  # and then proceeds to a review/save menu. Users can type `*` at any prompt to
+  # cancel and return to the main menu.
   @spec create(AddressBookEcto.User.t()) :: no_return
   defp create(current_user) do
     IO.puts(String.pad_leading(" Add Contact ", 50, "#"))
@@ -317,19 +211,8 @@ defmodule AddressBookEcto do
     review_new_contact(new_contact_details, current_user)
   end
 
-  @doc """
-  Displays a summary of the new contact details and provides options to
-  save, edit, or cancel the contact creation.
-
-  ## Parameters
-    * `contact_details`: A `Map` containing the `first_name`, `last_name`,
-      `contact`, and `email` of the new contact.
-    * `current_user`: The `AddressBookEcto.User` struct of the currently logged-in user.
-
-  ## Returns
-    * This function interacts with the user and calls `save_new_contact/2`,
-      `edit_new_contact_details/2`, or `main_loop/1`. It does not return a specific value.
-  """
+  # Displays a summary of the new contact details and provides options to
+  # save, edit, or cancel the contact creation.
   @spec review_new_contact(map(), AddressBookEcto.User.t()) :: no_return
   defp review_new_contact(contact_details, current_user) do
     IO.puts(String.pad_leading(" Summary ", 50, "-"))
@@ -338,7 +221,6 @@ defmodule AddressBookEcto do
     IO.puts("Phone Number: #{contact_details.contact}") # Assuming 'contact' is phone number
     IO.puts("Email: #{contact_details.email}")
     IO.puts(String.pad_leading("", 50, "-"))
-
 
     IO.puts("\nWhat would you like to do next?")
     IO.puts("1. Save Contact")
@@ -358,20 +240,8 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Saves the new contact details to the database, associating it with the `current_user`.
-
-  It constructs a changeset for `AddressBookEcto.Contact` and attempts to insert it.
-
-  ## Parameters
-    * `contact_details`: A `Map` containing the `first_name`, `last_name`,
-      `contact`, and `email` of the new contact.
-    * `current_user`: The `AddressBookEcto.User` struct of the currently logged-in user.
-
-  ## Returns
-    * This function interacts with the database and then calls `view/1` or `main_loop/1`.
-      It does not return a specific value itself.
-  """
+  # Saves the new contact details to the database, associating it with the `current_user`.
+  # It constructs a changeset for `AddressBookEcto.Contact` and attempts to insert it.
   @spec save_new_contact(map(), AddressBookEcto.User.t()) :: no_return
   defp save_new_contact(contact_details, current_user) do
     # Create a map of contact attributes for the changeset, INCLUDING user_id
@@ -381,7 +251,7 @@ defmodule AddressBookEcto do
     # Create a new Contact struct and build a changeset by casting the attributes.
     # The Contact.changeset is expected to handle casting the user_id from integer to the correct type for the database.
     final_changeset = %AddressBookEcto.Contact{}
-                       |> AddressBookEcto.Contact.changeset(contact_attrs) # Pass the attrs including user_id
+                      |> AddressBookEcto.Contact.changeset(contact_attrs) # Pass the attrs including user_id
 
     # Attempt to insert the contact using the final changeset
     AddressBookEcto.Repo.insert(final_changeset)
@@ -396,20 +266,9 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Allows the user to edit the details of a contact they are currently creating.
-
-  It prompts for each field, allowing blank input to keep the existing value.
-  Users can type `*` to cancel and return to the main menu.
-
-  ## Parameters
-    * `current_details`: A `Map` containing the current details of the contact being created.
-    * `current_user`: The `AddressBookEcto.User` struct of the currently logged-in user.
-
-  ## Returns
-    * This function interacts with the user and calls `review_new_contact/2`
-      or `main_loop/1`. It does not return a specific value.
-  """
+  # Allows the user to edit the details of a contact they are currently creating.
+  # It prompts for each field, allowing blank input to keep the existing value.
+  # Users can type `*` to cancel and return to the main menu.
   @spec edit_new_contact_details(map(), AddressBookEcto.User.t()) :: no_return
   defp edit_new_contact_details(current_details, current_user) do
     IO.puts(String.pad_leading(" Edit New Contact Details ", 50, "#"))
@@ -440,21 +299,10 @@ defmodule AddressBookEcto do
     review_new_contact(updated_details, current_user)
   end
 
-
-  @doc """
-  Allows the current user to edit an existing contact.
-
-  It displays the user's contacts, prompts for a contact ID to edit,
-  then allows updating individual fields. Users can type `*` at any prompt
-  to cancel and return to the main menu.
-
-  ## Parameters
-    * `current_user`: The `AddressBookEcto.User` struct of the currently logged-in user.
-
-  ## Returns
-    * This function interacts with the user and the database, then calls `view/1`
-      or `main_loop/1`. It does not return a specific value.
-  """
+  # Allows the current user to edit an existing contact.
+  # It displays the user's contacts, prompts for a contact ID to edit,
+  # then allows updating individual fields. Users can type `*` at any prompt
+  # to cancel and return to the main menu.
   @spec edit(AddressBookEcto.User.t()) :: no_return
   defp edit(current_user) do
     # Fetch current user's contacts from the database using a query
@@ -525,18 +373,8 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Views and displays all contacts associated with the `current_user`.
-
-  If the user has no contacts, a message indicating this is displayed.
-
-  ## Parameters
-    * `current_user`: The `AddressBookEcto.User` struct of the currently logged-in user.
-
-  ## Returns
-    * This function interacts with the database and the user interface.
-      It then calls `main_loop(current_user)`. It does not return a specific value.
-  """
+  # Views and displays all contacts associated with the `current_user`.
+  # If the user has no contacts, a message indicating this is displayed.
   @spec view(AddressBookEcto.User.t()) :: no_return
   defp view(current_user) do
     # Fetch current user's contacts from the database
@@ -553,19 +391,9 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Allows the current user to delete an existing contact.
-
-  It displays the user's contacts, prompts for a contact ID to delete.
-  Users can type `*` to cancel and return to the main menu.
-
-  ## Parameters
-    * `current_user`: The `AddressBookEcto.User` struct of the currently logged-in user.
-
-  ## Returns
-    * This function interacts with the user and the database, then calls `view/1`
-      or `main_loop/1`. It does not return a specific value.
-  """
+  # Allows the current user to delete an existing contact.
+  # It displays the user's contacts, prompts for a contact ID to delete.
+  # Users can type `*` to cancel and return to the main menu.
   @spec delete(AddressBookEcto.User.t()) :: no_return
   defp delete(current_user) do
     # Fetch current user's contacts from the database
@@ -615,19 +443,9 @@ defmodule AddressBookEcto do
     end
   end
 
-  @doc """
-  Searches contacts for the current user based on a provided search term.
-
-  It performs a case-insensitive search across first name, last name, contact number, and email.
-  Users can type `*` to cancel and return to the main menu.
-
-  ## Parameters
-    * `current_user`: The `AddressBookEcto.User` struct of the currently logged-in user.
-
-  ## Returns
-    * This function interacts with the database and the user interface.
-      It then calls `main_loop(current_user)`. It does not return a specific value.
-  """
+  # Searches contacts for the current user based on a provided search term.
+  # It performs a case-insensitive search across first name, last name, contact number, and email.
+  # Users can type `*` to cancel and return to the main menu.
   @spec search(AddressBookEcto.User.t()) :: no_return
   defp search(current_user) do
     IO.puts(String.pad_leading(" Search Contacts ", 50, "#"))
@@ -658,17 +476,11 @@ defmodule AddressBookEcto do
   end
 
 
-  @doc """
-  Ends the application session gracefully.
-
-  This function is called when the user selects to end the session (e.g., by entering '0'
-  in the authentication menu or by reaching end-of-file (Ctrl+D) in input).
-  The process will exit naturally when `IO.gets` receives `:eof` in `main_loop`
-  or the external shell process terminates.
-
-  ## Returns
-    * `:ok`
-  """
+  # Ends the application session gracefully.
+  # This function is called when the user selects to end the session (e.g., by entering '0'
+  # in the authentication menu or by reaching end-of-file (Ctrl+D) in input).
+  # The process will exit naturally when `IO.gets` receives `:eof` in `main_loop`
+  # or the external shell process terminates.
   @spec end_session() :: :ok
   defp end_session do
     IO.puts(String.pad_leading(" Session Ended. Hope to see you soon.", 50, "#"))
@@ -681,29 +493,13 @@ defmodule AddressBookEcto do
 
   # --- Helper Functions ---
 
-  @doc """
-  Gets input from the user with a given prompt and trims leading/trailing whitespace.
-
-  ## Parameters
-    * `prompt`: The `String` message to display to the user before reading input.
-
-  ## Returns
-    * A `String.t()` containing the user's trimmed input.
-  """
+  # Gets input from the user with a given prompt and trims leading/trailing whitespace.
   @spec get_input(String.t()) :: String.t()
   defp get_input(prompt) do
     IO.gets(prompt) |> String.trim()
   end
 
-  @doc """
-  Displays a list of contacts by iterating over them and calling `display_contact/1` for each.
-
-  ## Parameters
-    * `contacts`: A `List` of `AddressBookEcto.Contact` structs to be displayed.
-
-  ## Returns
-    * `:ok` (prints to console)
-  """
+  # Displays a list of contacts by iterating over them and calling `display_contact/1` for each.
   @spec display_contacts(list(AddressBookEcto.Contact.t())) :: :ok
   defp display_contacts(contacts) do
     Enum.each(contacts, fn contact ->
@@ -712,15 +508,7 @@ defmodule AddressBookEcto do
     end)
   end
 
-  @doc """
-  Displays the details of a single contact, including its database ID.
-
-  ## Parameters
-    * `contact`: An `AddressBookEcto.Contact` struct to be displayed.
-
-  ## Returns
-    * `:ok` (prints to console)
-  """
+  # Displays the details of a single contact, including its database ID.
   @spec display_contact(AddressBookEcto.Contact.t()) :: :ok
   defp display_contact(contact) do
     IO.puts("ID = #{contact.id}") # Display the contact's integer ID

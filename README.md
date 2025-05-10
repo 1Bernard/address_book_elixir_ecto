@@ -22,7 +22,7 @@ A basic command-line application in Elixir for managing personal contacts with m
     * A running database server (e.g., PostgreSQL, MySQL, SQLite). This README assumes PostgreSQL, but you can adapt the `config/config.exs` and dependency (`mix.exs`) for other databases.
 2.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/1Bernard/address_book_elixir_ecto](https://github.com/1Bernard/address_book_elixir_ecto) # Update with your Ecto repo URL
+    git clone https://github.com/1Bernard/address_book_elixir_ecto
     cd address_book_elixir_ecto
     ```
 3.  **Configure Database Connection:**

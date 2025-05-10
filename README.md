@@ -109,6 +109,8 @@ The code includes `@moduledoc` and `@doc` attributes. You can generate browsable
     ```
 3.  Open the generated documentation in your web browser by opening the file `doc/index.html`.
 
+**Alternatively, you can view the deployed documentation online:** [https://1bernard.github.io/address_book_elixir_ecto/readme.html](https://1bernard.github.io/address_book_elixir_ecto/readme.html)
+
 ## Areas for Improvement and Further Learning
 
 This application can be extended and improved in many ways. Consider implementing some of these to further practice your Elixir and Ecto skills:

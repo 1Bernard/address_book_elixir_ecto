@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.37.3">
+    <meta name="project" content="address_book_ecto v0.1.0">
+
+
+    <title>AddressBookEcto — address_book_ecto v0.1.0</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-6X3L5KMG.css" />
+
+    <script defer src="dist/sidebar_items-A3A13AA8.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-ALU6OERS.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+      <div>
+        <a href="readme.html" class="sidebar-projectName" translate="no">
+address_book_ecto
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v0.1.0
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-module" id="main" data-type="modules">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of address_book_ecto</span>
+            <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          </label>
+          <button type="submit" class="search-button" aria-label="Submit Search" tabindex="-1">
+            <i class="ri-search-2-line ri-lg" aria-hidden="true"></i>
+          </button>
+          <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+            <i class="ri-close-line ri-lg" title="Cancel search"></i>
+          </button>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>
+      <span translate="no">AddressBookEcto</span> 
+      <small class="app-vsn" translate="no">(address_book_ecto v0.1.0)</small>
+
+    </h1>
+
+  </div>
+
+
+    <section id="moduledoc">
+<p><a href="AddressBookEcto.html"><code class="inline">AddressBookEcto</code></a> is the main module for a command-line Address Book application that uses Ecto
+for database interactions. It provides functionalities for user authentication (registration, login, logout)
+and contact management (add, edit, view, delete, search contacts).</p><p>This module manages the application's main loop, transitioning between pre-login (authentication)
+and post-login (contact management) states based on the user's login status.</p><h2 id="module-usage" class="section-heading">
+  <a href="#module-usage" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Usage</span>
+</h2>
+<p>To start the application, typically from your application supervisor:</p><pre><code class="makeup elixir" translate="no"><span class="nc">AddressBookEcto</span><span class="o">.</span><span class="n">run</span><span class="p" data-group-id="3757631497-1">(</span><span class="p" data-group-id="3757631497-1">)</span></code></pre><p>The application will then present a menu in the console, guiding the user through
+authentication or contact management.</p><p><strong>WARNING</strong>: This implementation stores user passwords in plain text. For a production
+application, it's crucial to use a secure password hashing library like <code class="inline">Comeonin</code>.</p>
+    </section>
+
+</div>
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h1>
+<div class="summary-functions summary">
+  <h2>
+    <a href="#functions">Functions</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#auth_menu/0" data-no-tooltip="" translate="no">auth_menu()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Displays the authentication menu options.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#contact_menu/0" data-no-tooltip="" translate="no">contact_menu()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Displays the contact management menu options.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#create/1" data-no-tooltip="" translate="no">create(current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Guides the user through adding a new contact.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#delete/1" data-no-tooltip="" translate="no">delete(current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Allows the current user to delete an existing contact.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#display_contact/1" data-no-tooltip="" translate="no">display_contact(contact)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Displays the details of a single contact, including its database ID.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#display_contacts/1" data-no-tooltip="" translate="no">display_contacts(contacts)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Displays a list of contacts by iterating over them and calling <a href="#display_contact/1"><code class="inline">display_contact/1</code></a> for each.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#edit/1" data-no-tooltip="" translate="no">edit(current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Allows the current user to edit an existing contact.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#edit_new_contact_details/2" data-no-tooltip="" translate="no">edit_new_contact_details(current_details, current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Allows the user to edit the details of a contact they are currently creating.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#end_session/0" data-no-tooltip="" translate="no">end_session()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Ends the application session gracefully.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#get_input/1" data-no-tooltip="" translate="no">get_input(prompt)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Gets input from the user with a given prompt and trims leading/trailing whitespace.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#handle_auth_action/1" data-no-tooltip="" translate="no">handle_auth_action(input)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Handles actions when no user is logged in (registration, login, exit).</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#handle_contact_action/2" data-no-tooltip="" translate="no">handle_contact_action(input, current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Handles actions when a user is logged in (Add, Edit, View, Delete contacts, Logout, Search).</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#login/0" data-no-tooltip="" translate="no">login()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Logs in an existing user by checking the provided username and password
+against the database.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#logout/0" data-no-tooltip="" translate="no">logout()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Logs out the current user.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#main_loop/1" data-no-tooltip="" translate="no">main_loop(current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>The main application loop that handles both pre-login and post-login states.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#register/0" data-no-tooltip="" translate="no">register()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Registers a new user by getting username and password from the console
+and inserting them into the database.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#review_new_contact/2" data-no-tooltip="" translate="no">review_new_contact(contact_details, current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Displays a summary of the new contact details and provides options to
+save, edit, or cancel the contact creation.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#run/0" data-no-tooltip="" translate="no">run()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Starts the address book application loop.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#save_new_contact/2" data-no-tooltip="" translate="no">save_new_contact(contact_details, current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Saves the new contact details to the database, associating it with the <code class="inline">current_user</code>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#search/1" data-no-tooltip="" translate="no">search(current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Searches contacts for the current user based on a provided search term.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#view/1" data-no-tooltip="" translate="no">view(current_user)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Views and displays all contacts associated with the <code class="inline">current_user</code>.</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="auth_menu/0">
+
+  <div class="detail-header">
+    <a href="#auth_menu/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">auth_menu()</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> auth_menu() :: :ok</pre>
+
+      </div>
+
+<p>Displays the authentication menu options.</p><p>This menu is shown when no user is logged in, providing options for registration, login, or exiting the application.</p><h2 id="auth_menu/0-returns" class="section-heading">
+  <a href="#auth_menu/0-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">:ok</code> (prints to console)</li></ul>
+  </section>
+</section>
+<section class="detail" id="contact_menu/0">
+
+  <div class="detail-header">
+    <a href="#contact_menu/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">contact_menu()</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> contact_menu() :: :ok</pre>
+
+      </div>
+
+<p>Displays the contact management menu options.</p><p>This menu is shown when a user is logged in, providing options for adding, editing,
+viewing, deleting, searching contacts, or logging out.</p><h2 id="contact_menu/0-returns" class="section-heading">
+  <a href="#contact_menu/0-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">:ok</code> (prints to console)</li></ul>
+  </section>
+</section>
+<section class="detail" id="create/1">
+
+  <div class="detail-header">
+    <a href="#create/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">create(current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> create(<a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Guides the user through adding a new contact.</p><p>It prompts for contact details (first name, last name, contact number, email)
+and then proceeds to a review/save menu. Users can type <code class="inline">*</code> at any prompt to
+cancel and return to the main menu.</p><h2 id="create/1-parameters" class="section-heading">
+  <a href="#create/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">current_user</code>: The <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct of the currently logged-in user.</li></ul><h2 id="create/1-returns" class="section-heading">
+  <a href="#create/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the user and calls <a href="#review_new_contact/2"><code class="inline">review_new_contact/2</code></a>
+or <a href="#main_loop/1"><code class="inline">main_loop/1</code></a>. It does not return a specific value.</li></ul>
+  </section>
+</section>
+<section class="detail" id="delete/1">
+
+  <div class="detail-header">
+    <a href="#delete/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">delete(current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> delete(<a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Allows the current user to delete an existing contact.</p><p>It displays the user's contacts, prompts for a contact ID to delete.
+Users can type <code class="inline">*</code> to cancel and return to the main menu.</p><h2 id="delete/1-parameters" class="section-heading">
+  <a href="#delete/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">current_user</code>: The <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct of the currently logged-in user.</li></ul><h2 id="delete/1-returns" class="section-heading">
+  <a href="#delete/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the user and the database, then calls <a href="#view/1"><code class="inline">view/1</code></a>
+or <a href="#main_loop/1"><code class="inline">main_loop/1</code></a>. It does not return a specific value.</li></ul>
+  </section>
+</section>
+<section class="detail" id="display_contact/1">
+
+  <div class="detail-header">
+    <a href="#display_contact/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">display_contact(contact)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> display_contact(<a href="AddressBookEcto.Contact.html#t:t/0">AddressBookEcto.Contact.t</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Displays the details of a single contact, including its database ID.</p><h2 id="display_contact/1-parameters" class="section-heading">
+  <a href="#display_contact/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">contact</code>: An <a href="AddressBookEcto.Contact.html"><code class="inline">AddressBookEcto.Contact</code></a> struct to be displayed.</li></ul><h2 id="display_contact/1-returns" class="section-heading">
+  <a href="#display_contact/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">:ok</code> (prints to console)</li></ul>
+  </section>
+</section>
+<section class="detail" id="display_contacts/1">
+
+  <div class="detail-header">
+    <a href="#display_contacts/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">display_contacts(contacts)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> display_contacts([<a href="AddressBookEcto.Contact.html#t:t/0">AddressBookEcto.Contact.t</a>()]) :: :ok</pre>
+
+      </div>
+
+<p>Displays a list of contacts by iterating over them and calling <a href="#display_contact/1"><code class="inline">display_contact/1</code></a> for each.</p><h2 id="display_contacts/1-parameters" class="section-heading">
+  <a href="#display_contacts/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">contacts</code>: A <a href="https://hexdocs.pm/elixir/List.html"><code class="inline">List</code></a> of <a href="AddressBookEcto.Contact.html"><code class="inline">AddressBookEcto.Contact</code></a> structs to be displayed.</li></ul><h2 id="display_contacts/1-returns" class="section-heading">
+  <a href="#display_contacts/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">:ok</code> (prints to console)</li></ul>
+  </section>
+</section>
+<section class="detail" id="edit/1">
+
+  <div class="detail-header">
+    <a href="#edit/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">edit(current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> edit(<a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Allows the current user to edit an existing contact.</p><p>It displays the user's contacts, prompts for a contact ID to edit,
+then allows updating individual fields. Users can type <code class="inline">*</code> at any prompt
+to cancel and return to the main menu.</p><h2 id="edit/1-parameters" class="section-heading">
+  <a href="#edit/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">current_user</code>: The <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct of the currently logged-in user.</li></ul><h2 id="edit/1-returns" class="section-heading">
+  <a href="#edit/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the user and the database, then calls <a href="#view/1"><code class="inline">view/1</code></a>
+or <a href="#main_loop/1"><code class="inline">main_loop/1</code></a>. It does not return a specific value.</li></ul>
+  </section>
+</section>
+<section class="detail" id="edit_new_contact_details/2">
+
+  <div class="detail-header">
+    <a href="#edit_new_contact_details/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">edit_new_contact_details(current_details, current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> edit_new_contact_details(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), <a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Allows the user to edit the details of a contact they are currently creating.</p><p>It prompts for each field, allowing blank input to keep the existing value.
+Users can type <code class="inline">*</code> to cancel and return to the main menu.</p><h2 id="edit_new_contact_details/2-parameters" class="section-heading">
+  <a href="#edit_new_contact_details/2-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">current_details</code>: A <a href="https://hexdocs.pm/elixir/Map.html"><code class="inline">Map</code></a> containing the current details of the contact being created.</li><li><code class="inline">current_user</code>: The <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct of the currently logged-in user.</li></ul><h2 id="edit_new_contact_details/2-returns" class="section-heading">
+  <a href="#edit_new_contact_details/2-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the user and calls <a href="#review_new_contact/2"><code class="inline">review_new_contact/2</code></a>
+or <a href="#main_loop/1"><code class="inline">main_loop/1</code></a>. It does not return a specific value.</li></ul>
+  </section>
+</section>
+<section class="detail" id="end_session/0">
+
+  <div class="detail-header">
+    <a href="#end_session/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">end_session()</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> end_session() :: :ok</pre>
+
+      </div>
+
+<p>Ends the application session gracefully.</p><p>This function is called when the user selects to end the session (e.g., by entering '0'
+in the authentication menu or by reaching end-of-file (Ctrl+D) in input).
+The process will exit naturally when <code class="inline">IO.gets</code> receives <code class="inline">:eof</code> in <code class="inline">main_loop</code>
+or the external shell process terminates.</p><h2 id="end_session/0-returns" class="section-heading">
+  <a href="#end_session/0-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">:ok</code></li></ul>
+  </section>
+</section>
+<section class="detail" id="get_input/1">
+
+  <div class="detail-header">
+    <a href="#get_input/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">get_input(prompt)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> get_input(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+<p>Gets input from the user with a given prompt and trims leading/trailing whitespace.</p><h2 id="get_input/1-parameters" class="section-heading">
+  <a href="#get_input/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">prompt</code>: The <a href="https://hexdocs.pm/elixir/String.html"><code class="inline">String</code></a> message to display to the user before reading input.</li></ul><h2 id="get_input/1-returns" class="section-heading">
+  <a href="#get_input/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>A <code class="inline">String.t()</code> containing the user's trimmed input.</li></ul>
+  </section>
+</section>
+<section class="detail" id="handle_auth_action/1">
+
+  <div class="detail-header">
+    <a href="#handle_auth_action/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">handle_auth_action(input)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> handle_auth_action(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Handles actions when no user is logged in (registration, login, exit).</p><p>It directs the flow based on the user's menu choice.</p><h2 id="handle_auth_action/1-parameters" class="section-heading">
+  <a href="#handle_auth_action/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">input</code>: A <a href="https://hexdocs.pm/elixir/String.html"><code class="inline">String</code></a> representing the user's menu selection.</li></ul><h2 id="handle_auth_action/1-returns" class="section-heading">
+  <a href="#handle_auth_action/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function calls other functions which eventually lead back to <code class="inline">main_loop(nil)</code>,
+so it doesn't return a specific value itself.</li></ul>
+  </section>
+</section>
+<section class="detail" id="handle_contact_action/2">
+
+  <div class="detail-header">
+    <a href="#handle_contact_action/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">handle_contact_action(input, current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> handle_contact_action(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Handles actions when a user is logged in (Add, Edit, View, Delete contacts, Logout, Search).</p><p>It directs the flow based on the user's menu choice and the <code class="inline">current_user</code>.</p><h2 id="handle_contact_action/2-parameters" class="section-heading">
+  <a href="#handle_contact_action/2-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">input</code>: A <a href="https://hexdocs.pm/elixir/String.html"><code class="inline">String</code></a> representing the user's menu selection.</li><li><code class="inline">current_user</code>: The <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct of the currently logged-in user.</li></ul><h2 id="handle_contact_action/2-returns" class="section-heading">
+  <a href="#handle_contact_action/2-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function calls other functions which eventually lead back to <code class="inline">main_loop(current_user)</code>,
+so it doesn't return a specific value itself.</li></ul>
+  </section>
+</section>
+<section class="detail" id="login/0">
+
+  <div class="detail-header">
+    <a href="#login/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">login()</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> login() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Logs in an existing user by checking the provided username and password
+against the database.</p><p><strong>WARNING</strong>: This function performs a plain text password check. For production,
+implement secure password verification using hashing (e.g., <code class="inline">Bcrypt</code> via <code class="inline">Comeonin</code>).</p><h2 id="login/0-returns" class="section-heading">
+  <a href="#login/0-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the user via <code class="inline">IO.gets</code> and <code class="inline">IO.puts</code>.
+If login is successful, it calls <code class="inline">main_loop(fetched_user)</code>; otherwise,
+it calls <code class="inline">main_loop(nil)</code>.</li></ul>
+  </section>
+</section>
+<section class="detail" id="logout/0">
+
+  <div class="detail-header">
+    <a href="#logout/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">logout()</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> logout() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Logs out the current user.</p><p>It returns the application to the pre-login state by calling <code class="inline">main_loop(nil)</code>.</p><h2 id="logout/0-returns" class="section-heading">
+  <a href="#logout/0-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function calls <code class="inline">main_loop(nil)</code> and does not return a specific value itself.</li></ul>
+  </section>
+</section>
+<section class="detail" id="main_loop/1">
+
+  <div class="detail-header">
+    <a href="#main_loop/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">main_loop(current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> main_loop(<a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>() | nil) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>The main application loop that handles both pre-login and post-login states.</p><p>The state is managed by passing the <code class="inline">current_user</code> struct (or <code class="inline">nil</code> if not logged in)
+through recursive calls. It displays the appropriate menu and delegates input handling.</p><h2 id="main_loop/1-parameters" class="section-heading">
+  <a href="#main_loop/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">current_user</code>: An <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct if a user is logged in,
+or <code class="inline">nil</code> if no user is logged in.</li></ul><h2 id="main_loop/1-returns" class="section-heading">
+  <a href="#main_loop/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function calls itself recursively and does not return a specific value
+until the session is ended.</li></ul>
+  </section>
+</section>
+<section class="detail" id="register/0">
+
+  <div class="detail-header">
+    <a href="#register/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">register()</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> register() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Registers a new user by getting username and password from the console
+and inserting them into the database.</p><p><strong>WARNING</strong>: This implementation stores passwords in plain text. In a
+production environment, use a library like <code class="inline">Comeonin</code> for secure password hashing.</p><h2 id="register/0-returns" class="section-heading">
+  <a href="#register/0-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the user via <code class="inline">IO.gets</code> and <code class="inline">IO.puts</code>,
+and then calls <code class="inline">main_loop(nil)</code> to return to the authentication menu.</li></ul>
+  </section>
+</section>
+<section class="detail" id="review_new_contact/2">
+
+  <div class="detail-header">
+    <a href="#review_new_contact/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">review_new_contact(contact_details, current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> review_new_contact(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), <a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Displays a summary of the new contact details and provides options to
+save, edit, or cancel the contact creation.</p><h2 id="review_new_contact/2-parameters" class="section-heading">
+  <a href="#review_new_contact/2-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">contact_details</code>: A <a href="https://hexdocs.pm/elixir/Map.html"><code class="inline">Map</code></a> containing the <code class="inline">first_name</code>, <code class="inline">last_name</code>,
+<code class="inline">contact</code>, and <code class="inline">email</code> of the new contact.</li><li><code class="inline">current_user</code>: The <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct of the currently logged-in user.</li></ul><h2 id="review_new_contact/2-returns" class="section-heading">
+  <a href="#review_new_contact/2-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the user and calls <a href="#save_new_contact/2"><code class="inline">save_new_contact/2</code></a>,
+<a href="#edit_new_contact_details/2"><code class="inline">edit_new_contact_details/2</code></a>, or <a href="#main_loop/1"><code class="inline">main_loop/1</code></a>. It does not return a specific value.</li></ul>
+  </section>
+</section>
+<section class="detail" id="run/0">
+
+  <div class="detail-header">
+    <a href="#run/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">run()</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> run() :: :ok | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Starts the address book application loop.</p><p>This function is typically called from the application supervisor's <code class="inline">start</code> function.
+It initializes the main loop in a pre-login state (no user logged in).</p><p>The Ecto repository (<a href="AddressBookEcto.Repo.html"><code class="inline">AddressBookEcto.Repo</code></a>) is expected to be started
+in the application's supervision tree before calling this function.</p><h2 id="run/0-examples" class="section-heading">
+  <a href="#run/0-examples" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Examples</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">AddressBookEcto</span><span class="o">.</span><span class="n">run</span><span class="p" data-group-id="2149167558-1">(</span><span class="p" data-group-id="2149167558-1">)</span><span class="w">
+</span><span class="c1"># Starts the application loop, presenting the authentication menu.</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="save_new_contact/2">
+
+  <div class="detail-header">
+    <a href="#save_new_contact/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">save_new_contact(contact_details, current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> save_new_contact(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), <a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Saves the new contact details to the database, associating it with the <code class="inline">current_user</code>.</p><p>It constructs a changeset for <a href="AddressBookEcto.Contact.html"><code class="inline">AddressBookEcto.Contact</code></a> and attempts to insert it.</p><h2 id="save_new_contact/2-parameters" class="section-heading">
+  <a href="#save_new_contact/2-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">contact_details</code>: A <a href="https://hexdocs.pm/elixir/Map.html"><code class="inline">Map</code></a> containing the <code class="inline">first_name</code>, <code class="inline">last_name</code>,
+<code class="inline">contact</code>, and <code class="inline">email</code> of the new contact.</li><li><code class="inline">current_user</code>: The <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct of the currently logged-in user.</li></ul><h2 id="save_new_contact/2-returns" class="section-heading">
+  <a href="#save_new_contact/2-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the database and then calls <a href="#view/1"><code class="inline">view/1</code></a> or <a href="#main_loop/1"><code class="inline">main_loop/1</code></a>.
+It does not return a specific value itself.</li></ul>
+  </section>
+</section>
+<section class="detail" id="search/1">
+
+  <div class="detail-header">
+    <a href="#search/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">search(current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> search(<a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Searches contacts for the current user based on a provided search term.</p><p>It performs a case-insensitive search across first name, last name, contact number, and email.
+Users can type <code class="inline">*</code> to cancel and return to the main menu.</p><h2 id="search/1-parameters" class="section-heading">
+  <a href="#search/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">current_user</code>: The <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct of the currently logged-in user.</li></ul><h2 id="search/1-returns" class="section-heading">
+  <a href="#search/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the database and the user interface.
+It then calls <code class="inline">main_loop(current_user)</code>. It does not return a specific value.</li></ul>
+  </section>
+</section>
+<section class="detail" id="view/1">
+
+  <div class="detail-header">
+    <a href="#view/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">view(current_user)</h1>
+
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> view(<a href="AddressBookEcto.User.html#t:t/0">AddressBookEcto.User.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+<p>Views and displays all contacts associated with the <code class="inline">current_user</code>.</p><p>If the user has no contacts, a message indicating this is displayed.</p><h2 id="view/1-parameters" class="section-heading">
+  <a href="#view/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">current_user</code>: The <a href="AddressBookEcto.User.html"><code class="inline">AddressBookEcto.User</code></a> struct of the currently logged-in user.</li></ul><h2 id="view/1-returns" class="section-heading">
+  <a href="#view/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>This function interacts with the database and the user interface.
+It then calls <code class="inline">main_loop(current_user)</code>. It does not return a specific value.</li></ul>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+    <footer class="footer">
+      <p>
+
+        <span class="line">
+          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+            Search HexDocs
+          </button>
+
+            <a href="address_book_ecto.epub" title="ePub version">
+              Download ePub version
+            </a>
+
+        </span>
+      </p>
+
+      <p class="built-using">
+        Built using
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.37.3) for the
+
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+      </p>
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>
